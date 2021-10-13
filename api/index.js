@@ -7,8 +7,14 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/api", (req, res) => {
-  // console.log(req);
   res.send({ message: `Get request received at ${req.url}` });
+});
+
+app.get("/api/:id", (req, res) => {
+  const id = req.params.id;
+  res.send({
+    message: `Get request received at ${req.url} for record ID: ${id}`,
+  });
 });
 
 app.post("/api", (req, res) => {
