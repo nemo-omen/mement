@@ -5,7 +5,10 @@
   "author": "Jeff Caldwell <jcaldwell2@angelo.edu>",
   "scripts": {
     "test": "jest",
-    "dev": "npx eslint ./src ./api && vite --host",
+    "lint": "npx eslint ./src ./api",
+    "client": "vite --host",
+    "server": "nodemon api/index.js",
+    "dev": "concurrently \"npm:lint\" \"npm:server\" \"npm:client\"",
     "build": "npx eslint ./src ./api && vite build --host",
     "serve": "vite preview"
   },
@@ -14,6 +17,7 @@
     "@babel/core": "^7.15.8",
     "@babel/eslint-parser": "^7.15.8",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.11",
+    "concurrently": "^6.3.0",
     "eslint": "^8.0.0",
     "eslint-plugin-svelte3": "^3.2.1",
     "prettier-plugin-svelte": "^2.4.0",
@@ -21,6 +25,7 @@
     "vite": "^2.6.4"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql2-promise": "^0.1.4"
   }
