@@ -8,7 +8,19 @@ app.use(express.json());
 
 app.get("/api", (req, res) => {
   // console.log(req);
-  res.send({ message: "Hello, from the api!" });
+  res.send({ message: `Get request received at ${req.url}` });
+});
+
+app.post("/api", (req, res) => {
+  res.send({ message: `POST request received at ${req.url}` });
+});
+
+app.put("/api/:id", (req, res) => {
+  res.send({ message: `PUT request received at ${req.url}` });
+});
+
+app.delete("/api/:id", (req, res) => {
+  res.send({ message: `DELETE request received at ${req.url}` });
 });
 
 app.listen("3030", () => {
