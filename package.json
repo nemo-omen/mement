@@ -5,8 +5,8 @@
   "author": "Jeff Caldwell <jcaldwell2@angelo.edu>",
   "scripts": {
     "test": "jest",
-    "dev": "npx eslint ./src ./api && vite",
-    "build": "npx eslint ./src ./api && vite build",
+    "dev": "npx eslint ./src ./api && vite --host",
+    "build": "npx eslint ./src ./api && vite build --host",
     "serve": "vite preview"
   },
   "devDependencies": {
@@ -22,6 +22,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
+    "mysql2-promise": "^0.1.4"
   }
 }
