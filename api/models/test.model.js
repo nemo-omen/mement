@@ -1,9 +1,12 @@
+import { src_url_equal } from "svelte/internal";
+import db from "../db/db.js";
+
 export class Test {
   #name;
   #email;
-  constructor(name, email) {
-    this.#name = name;
-    this.#email = email;
+  constructor(testObject) {
+    this.#name = testObject.name;
+    this.#email = testObject.email;
   }
 
   getName() {
@@ -21,5 +24,18 @@ export class Test {
   setEmail(email) {
     // TODO: you're really going to want some kind of validation here!
     this.#email = email;
+  }
+
+  create(newTest, result) {
+    sql.query("INSERT INTO test SET ?", newTest, (err, res) => {
+      if (err) {
+        console.error(err);
+        result(err, null);
+        return;
+      }
+
+      console.log("Created test: ", { id: res.insertId, ...newTest });
+      result(null, { id: res.insertId, ...newTest });
+    });
   }
 }
