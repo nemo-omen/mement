@@ -1,12 +1,11 @@
-import { src_url_equal } from "svelte/internal";
 import db from "../db/db.js";
 
 export class Test {
   #name;
   #email;
-  constructor(testObject) {
-    this.#name = testObject.name;
-    this.#email = testObject.email;
+  constructor(name, email) {
+    this.setName(name);
+    this.setEmail(email);
   }
 
   getName() {
@@ -26,15 +25,24 @@ export class Test {
     this.#email = email;
   }
 
-  create(newTest, result) {
-    sql.query("INSERT INTO test SET ?", newTest, (err, res) => {
+  create(testObject, result) {
+    const newTest = {
+      name: testObject.getName(),
+      email: testObject.getEmail(),
+    };
+
+    db.query(`INSERT INTO people SET ?`, newTest, (err, res) => {
       if (err) {
-        console.error(err);
+        console.error("Error inserting: ", err);
         result(err, null);
         return;
       }
 
-      console.log("Created test: ", { id: res.insertId, ...newTest });
+      console.log("Created person in test db: ", {
+        id: res.insertId,
+        ...newTest,
+      });
+
       result(null, { id: res.insertId, ...newTest });
     });
   }

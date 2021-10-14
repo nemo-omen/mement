@@ -1,16 +1,16 @@
 import { Test } from "../models/test.model.js";
 
 export const create = (req, res) => {
+  console.log(req.body);
   if (!req.body) {
     res.status(400).send({ message: "Content cannot be empty!" });
   }
 
-  const test = new Test({
-    name: req.body.name,
-    email: req.body.email,
-  });
+  const test = new Test(req.body.name, req.body.email);
 
-  Test.create(test, (err, data) => {
+  console.log("Ready to create person: ", test);
+
+  test.create(test, (err, data) => {
     if (err) {
       res.status(500).send({
         message:

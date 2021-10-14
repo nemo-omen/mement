@@ -18,9 +18,7 @@ app.get("/api/:id", (req, res) => {
   });
 });
 
-app.post("/api", (req, res) => {
-  res.send({ message: `POST request received at ${req.url}` });
-});
+app.post("/api", create);
 
 app.put("/api/:id", (req, res) => {
   res.send({ message: `PUT request received at ${req.url}` });
