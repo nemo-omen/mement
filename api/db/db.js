@@ -2,7 +2,7 @@
 import mysql from "mysql";
 import dbConfig from "./db.config.js";
 
-const { host, user, password, database } = dbConfig;
+const { host, user, password, database, table } = dbConfig;
 
 const connection = mysql.createConnection({ host, user, password });
 
@@ -15,10 +15,12 @@ connection.query(`CREATE DATABASE IF NOT EXISTS ${database}`);
 
 connection.query(`USE ${database}`);
 
-connection.query(`CREATE TABLE IF NOT EXISTS \`people\` (
+connection.query(`CREATE TABLE IF NOT EXISTS \`${table}\` (
   id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  name varchar(255) NOT NULL,
-  email varchar(255) NOT NULL
+  title varchar(255) NOT NULL,
+  created DATETIME NOT NULL,
+  modified DATETIME NOT NULL,
+  bodyContent TEXT NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8`);
 
 export default connection;
