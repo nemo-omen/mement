@@ -1,5 +1,5 @@
 import db from '../db/db.js';
-import mdastTypes from '@types/mdast';
+// import mdastTypes from '@types/mdast';
 
 /**
  * @typedef {{
@@ -18,14 +18,14 @@ export class Note {
   title
   bodyContent
   constructor() {
-    this.created = new Date(); // convert for db insertion! .toISOString().slice(0, 19).replace('T', ' ');
+    this.created = new Date().toISOString().slice(0, 19).replace('T', ' ');
     this.modified = this.created;
     this.title = 'Untitled Note';
     this.bodyContent = '';
   }
 
-  create() {
-    const newNote = new Note();
+  create(newNote, result) {
+
     db.query(`INSERT INTO notes SET ?`, newNote, (err, res) => {
       if (err) {
         console.error("Error inserting: ", err);
@@ -33,6 +33,9 @@ export class Note {
         return;
       }
 
+      if(res.affectedRows > 0) {
+        newNote.id = res.insertId
+      }
       console.log("Created note in notes table: ", {
         id: res.insertId,
         ...newNote,
