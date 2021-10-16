@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { create } from "./controllers/note.controller.js";
+import { create, update } from "./controllers/note.controller.js";
 
 const app = express();
 
@@ -20,9 +20,7 @@ app.get("/api/:id", (req, res) => {
 
 app.post("/api", create);
 
-app.put("/api/:id", (req, res) => {
-  res.send({ message: `PUT request received at ${req.url}` });
-});
+app.put("/api", update);
 
 app.delete("/api/:id", (req, res) => {
   res.send({ message: `DELETE request received at ${req.url}` });
