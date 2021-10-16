@@ -1,29 +1,26 @@
 import express from "express";
-import cors from "cors";
-import { create, update } from "./controllers/note.controller.js";
+import notes from './routes/note.routes.js';
+// import cors from "cors";
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
 
-app.get("/api", (req, res) => {
-  res.send({ message: `Get request received at ${req.url}` });
+app.all('/*', (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
-app.get("/api/:id", (req, res) => {
-  const id = req.params.id;
-  res.send({
-    message: `Get request received at ${req.url} for record ID: ${id}`,
-  });
-});
+app.disable('x-powered-by');
 
-app.post("/api", create);
+notes(app);
 
-app.put("/api/:id", update);
-
-app.delete("/api/:id", (req, res) => {
-  res.send({ message: `DELETE request received at ${req.url}` });
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(err.status || 500).send(err.stack);
 });
 
 app.listen("3030", () => {

@@ -1,4 +1,3 @@
-// import mysql from "mysql2-promise";
 import mysql from "mysql";
 import dbConfig from "./db.config.js";
 
