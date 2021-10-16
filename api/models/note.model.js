@@ -5,10 +5,15 @@ export default class Note {
   modified;
   bodyContent;
 
-  constructor() {
-    this.created = new Date().toLocaleString().slice(0, 19).replace('T', ' ');
-    this.modified = this.created;
-    this.title = 'Untitled Note';
-    this.bodyContent = '';
+  constructor(
+    title = 'Untitled Note',
+    created = new Date().toLocaleString().slice(0, 19).replace('T', ' '),
+    modified = new Date().toLocaleString().slice(0, 19).replace('T', ' '),
+    bodyContent = ''
+  ) {
+    this.title = title;
+    this.created = created;
+    this.modified = modified;
+    this.bodyContent = bodyContent;
   }
 }
