@@ -7,8 +7,8 @@ export default class Note {
 
   constructor(
     title = 'Untitled Note',
-    created = new Date().toLocaleString().slice(0, 19).replace('T', ' '),
-    modified = new Date().toLocaleString().slice(0, 19).replace('T', ' '),
+    created = new Date().toISOString().slice(0, 19).replace('T', ' '),
+    modified = new Date().toISOString().slice(0, 19).replace('T', ' '),
     bodyContent = ''
   ) {
     this.title = title;

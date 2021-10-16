@@ -8,4 +8,20 @@ export default class NoteService {
       console.error(error);
     }
   }
+
+  static async get(id) {
+    try {
+      return await db.query(`SELECT * FROM notes WHERE id = ?`, id);
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
+  static async create(note) {
+    try {
+      return await db.query(`INSERT INTO notes SET ?`, note);
+    } catch(error) {
+      console.error(error);
+    }
+  }
 }
