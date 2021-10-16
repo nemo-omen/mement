@@ -47,6 +47,8 @@ Note {
 
 ### Notes/Resources:
 
+[MVC-Service](https://dev.to/carlillo/understanding-mvc-services-for-frontend-vanillajs-335h)
+
 [Using promises with mysql queries](https://darifnemma.medium.com/how-to-interact-with-mysql-database-using-async-await-promises-in-node-js-9e6c81b683da)
 
 [Database seeding in Node js](https://levelup.gitconnected.com/database-seeding-in-node-js-2b2eec5bfaa1)
