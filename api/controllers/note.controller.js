@@ -1,7 +1,15 @@
 import { Note } from '../models/note.model.js';
 
+// export const getOne = (req, res) => {
+//   if(!req.params.id) {
+//     res.status(400).send({message: "Can't get a note with no id param."})
+//   }
+
+//   const note = new Note();
+
+// }
+
 export const create = (req, res) => {
-  // console.log(req.body);
   if (!req.body) {
     res.status(400).send({ message: "Content cannot be empty!" });
   }
@@ -22,26 +30,24 @@ export const create = (req, res) => {
   })};
 
 export const update = (req, res) => {
-  // console.log(req.body);
+  console.log('params: ', req.params);
+  
   if (!req.body) {
     res.status(400).send({ message: "Content cannot be empty!" });
   }
 
-  const {id, title, bodyContent} = req.body;
+  const id = req.params.id;
+  const {title, bodyContent} = req.body;
 
   const note = new Note();
-  note.id = id;
-  note.title = title;
-  note.bodyContent = bodyContent;
-  note.modified = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
   console.log("Ready to update note: ", {id, title, bodyContent});
 
   note.update({
-    id: note.id,
-    title: note.title,
-    modified: note.modified,
-    bodyContent: note.bodyContent
+    id: id,
+    title: title,
+    modified: new Date().toISOString().slice(0, 19).replace('T', ' '),
+    bodyContent: bodyContent
   }, (err, data) => {
     if (err) {
       res.status(500).send({
@@ -51,4 +57,5 @@ export const update = (req, res) => {
     } else {
       res.send(data);
     }
-  })};
+  }
+  )};

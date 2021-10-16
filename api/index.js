@@ -20,7 +20,7 @@ app.get("/api/:id", (req, res) => {
 
 app.post("/api", create);
 
-app.put("/api", update);
+app.put("/api/:id", update);
 
 app.delete("/api/:id", (req, res) => {
   res.send({ message: `DELETE request received at ${req.url}` });
