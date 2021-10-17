@@ -6,10 +6,10 @@ export default class Note {
   bodyContent;
 
   constructor(
-    title = 'Untitled Note',
-    created = new Date().toISOString().slice(0, 19).replace('T', ' '),
-    modified = new Date().toISOString().slice(0, 19).replace('T', ' '),
-    bodyContent = ''
+    title = "Untitled Note",
+    created = new Date().toISOString().slice(0, 19).replace("T", " "),
+    modified = new Date().toISOString().slice(0, 19).replace("T", " "),
+    bodyContent = ""
   ) {
     this.title = title;
     this.created = created;
@@ -22,11 +22,11 @@ export default class Note {
   }
 
   setCreated(date) {
-    this.created = new Date(date).toISOString().slice(0, 19).replace('T', ' ');
+    this.created = new Date(date).toISOString().slice(0, 19).replace("T", " ");
   }
 
   setModified() {
-    this.modified = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    this.modified = new Date().toISOString().slice(0, 19).replace("T", " ");
   }
 
   setTitle(title) {
@@ -34,6 +34,6 @@ export default class Note {
   }
 
   setBodyContent(bodyContent) {
-    this.bodyContent;
+    this.bodyContent = bodyContent;
   }
 }
