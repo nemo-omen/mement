@@ -24,4 +24,20 @@ export default class NoteService {
       console.error(error);
     }
   }
+
+  static async update(note) {
+    try {
+        return await db.query(`UPDATE notes SET ? WHERE id = ?`, [note, note.id]);
+    } catch(error) {
+      console.error(error);
+    }
+  }
+
+  static async delete(id) {
+    try {
+      return await db.query(`DELETE FROM notes WHERE id = ?`, id);
+    } catch(error) {
+      console.error(error);
+    }
+  }
 }
