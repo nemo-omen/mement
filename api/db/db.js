@@ -9,21 +9,6 @@ connection.connect((error) => {
   console.log(`Connected to database ${database} at ${host}`);
 });
 
-// function makeDb(config) {
-
-//   return {
-//     query(sql, args) {
-//       return util.promisify(connection.query)
-//         .call(connection, sql, args);
-//     },
-//     close() {
-//       return util.promisify(connection.end).call(connection);
-//     }
-//   }
-// }
-
-// const db = makeDb(cfg);
-
 try {
   const create = await connection.query(
     `CREATE DATABASE IF NOT EXISTS ${database}`
@@ -44,7 +29,9 @@ try {
 
   if (create[0].serverStatus === 2)
     console.log(`Database ${database} created or already exists.`);
+
   if (use[0].serverStatus === 2) console.log(`Using database ${database}`);
+
   if (createdTable[0].serverStatus === 2)
     console.log(`Table ${table} created or already exists`);
 } catch (error) {
