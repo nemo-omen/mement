@@ -3,7 +3,8 @@ const dbConfig = {
   user: "root",
   password: "Aliens1986!",
   database: "mement",
-  table: 'notes'
+  notesTable: 'notes',
+  userTable: 'users'
 };
 
 export default dbConfig;
