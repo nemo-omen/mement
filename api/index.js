@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import notes from "./routes/note.routes.js";
+import users from "./routes/user.routes.js";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.all("/*", (req, res, next) => {
 app.disable("x-powered-by");
 
 notes(app);
+users(app);
 
 app.use((err, req, res) => {
   console.log(err);
