@@ -5,17 +5,56 @@ const { host, user, password, database, notesTable, userTable } = dbConfig;
 
 const connection = await mysql.createConnection({ host, user, password });
 
-const testUser = {
-  name: "Jeff Caldwell",
-  email: "nemo.omen@gmail.com",
-  pass: "Aliens1986!",
-};
+const testUsers = [
+  {
+    name: "Test User",
+    email: "test@test.com",
+    pass: "Test1234!",
+  },
+  {
+    name: "Test User 2",
+    email: "test2@test.com",
+    pass: "Test1234!",
+  },
+  {
+    name: "Test User3",
+    email: "test3@test.com",
+    pass: "Test1234!",
+  },
+]
 
-const testNote = {
-  title: "This is a test title",
-  bodyContent: "This is some test content!",
-  user_id: 1,
-};
+const testNotes = [
+  {
+    title: "This is a test title",
+    bodyContent: "This is some test content!",
+    user_id: 1,
+  },
+  {
+    title: "This is a test title 2",
+    bodyContent: "This is some test content 2!",
+    user_id: 2,
+  },
+  {
+    title: "This is a test title 3",
+    bodyContent: "This is some test content 3!",
+    user_id: 3,
+  },
+  {
+    title: "This is a test title",
+    bodyContent: "This is some test content!",
+    user_id: 3,
+  },
+  {
+    title: "This is a test title 2",
+    bodyContent: "This is some test content 2!",
+    user_id: 1,
+  },
+  {
+    title: "This is a test title 3",
+    bodyContent: "This is some test content 3!",
+    user_id: 2,
+  }
+]
 
 connection.connect((error) => {
   if (error) throw error;
@@ -51,7 +90,9 @@ try {
 
   if (createdUserTable[0].serverStatus === 2) {
     console.log(`Table ${userTable} created or already exists`);
-    await connection.query(`INSERT INTO \`${userTable}\` SET ?`, testUser);
+    for(const user of testUsers) {
+      await connection.query(`INSERT INTO \`${userTable}\` SET ?`, user);
+    }
   }
 
   const createdNotesTable =
@@ -67,7 +108,9 @@ try {
 
   if (createdNotesTable[0].serverStatus === 2) {
     console.log(`Table ${notesTable} created or already exists`);
-    await connection.query(`INSERT INTO \`${notesTable}\` SET ?`, testNote);
+    for(const note of testNotes) {
+      await connection.query(`INSERT INTO \`${notesTable}\` SET ?`, note);
+    }
   }
 } catch (error) {
   console.error(error);
