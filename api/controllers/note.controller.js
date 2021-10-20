@@ -32,14 +32,23 @@ export default class NoteController {
 
       const createResponse = await service.create(note);
 
-      console.log("createResponse: ", createResponse);
+      if (createResponse[0].length < 1) {
+        throw new Error("Something went wrong while saving that note!");
+      } else {
+        note.id = createResponse[0].insertId;
 
-      res.status(200).send({
-        ok: true,
-        data: {
-          affectedRows: createResponse[0].affectedRows,
-        },
-      });
+        const response = await service.get(note.id);
+
+        const data = response[0][0];
+
+        note.created_at = data.created_at;
+        note.updated_at = data.updated_at;
+
+        res.status(200).send({
+          ok: true,
+          data: note,
+        });
+      }
     } catch (error) {
       res.status(500).send({ message: error.message });
     }

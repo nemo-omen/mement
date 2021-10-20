@@ -1,5 +1,5 @@
 export default class Note {
-  id;
+  id = null;
   title;
   bodyContent;
   created_at;
@@ -10,17 +10,5 @@ export default class Note {
     this.title = title;
     this.bodyContent = bodyContent;
     this.user_id = user_id;
-  }
-
-  setId(id) {
-    this.id = id;
-  }
-
-  setTitle(title) {
-    this.title = title;
-  }
-
-  setBodyContent(bodyContent) {
-    this.bodyContent = bodyContent;
   }
 }

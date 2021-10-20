@@ -1,6 +1,6 @@
 import db from "../db/db.js";
 
-export default class NoteService {
+export default class UserService {
   static async get(id) {
     try {
       return await db.query(`SELECT * FROM users WHERE id = ?`, id);
