@@ -17,6 +17,14 @@ export default class NoteService {
     }
   }
 
+  static async getByUserName(userName) {
+    try {
+      return await db.query(`SELECT * FROM users WHERE userName = ?`, userName);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   static async create(user) {
     try {
       return await db.query(`INSERT INTO users SET ?`, user);
@@ -27,7 +35,7 @@ export default class NoteService {
 
   static async update(user) {
     try {
-      return await db.query(`UPDATE notes SET ? WHERE id = ?`, [user, user.id]);
+      return await db.query(`UPDATE users SET ? WHERE id = ?`, [user, user.id]);
     } catch (error) {
       console.error(error);
     }

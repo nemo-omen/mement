@@ -4,33 +4,45 @@ import service from '../services/user.service.js';
 export default class UserController {
   static async register(req, res) {
     try {
-      const { name, email, password } = req.body;
+      const { name, userName, email, password } = req.body;
       const salt = await bcrypt.genSalt(10);
-      if(!(name && email && password)) {
+      if(!(name && email && password && userName)) {
         throw new Error("Registration fields cannot be empty.")
       }
 
 
       const user = {
         name,
+        userName,
         email,
         password: await bcrypt.hash(password, salt),
       };
 
-      const existing = await service.getByEmail(user.email);
+      const existingEmail = await service.getByEmail(user.email);
+      const existingUserName = await service.getByUserName(user.userName);
 
-      if(existing[0].length > 0) {
+      if(existingEmail[0].length > 0) {
         res.status(303)
-          .send({ ok: false, message: "A user with that email already exists!", data: user.email });
+        .send({ ok: false, message: "A user with that email already exists!", data: user.email });
+      } else if(existingUserName[0].length > 0) {
+          res.status(303)
+        .send({ ok: false, message: "A user with that user name already exists!", data: user.userName });
       } else {
         const createResponse = await service.create(user);
 
         if(createResponse[0].affectedRows < 1) {
           throw new Error('Something went wrong while saving that user!');
         } else { 
-          console.log(createResponse[0]);
           res.status(200)
-          .send({ ok: true, message: "Registration successful.", data: {id: createResponse[0].insertId, name: user.name, email: user.email} });
+          .send({ 
+            ok: true, 
+            message: "Registration successful.", 
+            data: {
+              id: createResponse[0].insertId, 
+              name: user.name, 
+              userName: user.userName, 
+              email: user.email
+            } });
         }
       }
 

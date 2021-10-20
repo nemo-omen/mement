@@ -2,6 +2,7 @@ export const testUsers = [
   {
     name: "Test User",
     email: "test@test.com",
+    userName: "testUser123",
     password: "Test1234!",
   },
 ];
