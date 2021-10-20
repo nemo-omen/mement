@@ -8,6 +8,7 @@ specifiers:
   '@types/mdast': ^3.0.10
   concurrently: ^6.3.0
   cors: ^2.8.5
+  dotenv: ^10.0.0
   eslint: ^8.0.0
   eslint-plugin-svelte3: ^3.2.1
   express: ^4.17.1
@@ -22,6 +23,7 @@ specifiers:
 dependencies:
   '@types/mdast': 3.0.10
   cors: 2.8.5
+  dotenv: 10.0.0
   express: 4.17.1
   mysql: 2.18.1
   mysql2: 2.3.2
@@ -733,6 +735,11 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dotenv/10.0.0:
+    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
+    engines: {node: '>=10'}
+    dev: false
 
   /double-ended-queue/2.0.0-0:
     resolution: {integrity: sha1-eEf9ocAPtyIkWv+DZDpIh2cO/Sw=}

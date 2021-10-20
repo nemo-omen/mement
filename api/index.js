@@ -1,5 +1,10 @@
+import dotenv from "dotenv";
 import express from "express";
 import notes from "./routes/note.routes.js";
+
+dotenv.config();
+
+const port = process.env.PORT || "3030";
 
 const app = express();
 
@@ -24,6 +29,6 @@ app.use((err, req, res) => {
   res.status(err.status || 500).send(err.stack);
 });
 
-app.listen("3030", () => {
-  console.log("API server listening for requests at http://localhost:3030");
+app.listen(port, () => {
+  console.log(`API server listening for requests at http://localhost:${port}`);
 });

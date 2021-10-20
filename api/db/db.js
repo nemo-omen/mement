@@ -1,6 +1,6 @@
 import mysql from "mysql2/promise";
 import dbConfig from "./db.config.js";
-import { testUsers, testNotes } from './demo.data.js';
+import { testUsers, testNotes } from "./demo.data.js";
 
 const { host, user, password, database, notesTable, userTable } = dbConfig;
 
@@ -34,13 +34,14 @@ try {
     await connection.query(`CREATE TABLE IF NOT EXISTS \`${userTable}\`(
       id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       name varchar(255) NOT NULL,
-      email varchar(255) NOT NULL,
-      pass varchar(255) NOT NULL
+      email varchar(255) NOT NULL UNIQUE,
+      pass varchar(255) NOT NULL,
+      token varchar(255)
       )ENGINE=InnoDB`);
 
   if (createdUserTable[0].serverStatus === 2) {
-    console.log(`Table ${userTable} created or already exists`);
-    for(const user of testUsers) {
+    console.log(`Table ${userTable} created`);
+    for (const user of testUsers) {
       await connection.query(`INSERT INTO \`${userTable}\` SET ?`, user);
     }
   }
@@ -57,8 +58,8 @@ try {
     )ENGINE=InnoDB`);
 
   if (createdNotesTable[0].serverStatus === 2) {
-    console.log(`Table ${notesTable} created or already exists`);
-    for(const note of testNotes) {
+    console.log(`Table ${notesTable} created`);
+    for (const note of testNotes) {
       await connection.query(`INSERT INTO \`${notesTable}\` SET ?`, note);
     }
   }
