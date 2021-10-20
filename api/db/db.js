@@ -1,60 +1,10 @@
 import mysql from "mysql2/promise";
 import dbConfig from "./db.config.js";
+import { testUsers, testNotes } from './demo.data.js';
 
 const { host, user, password, database, notesTable, userTable } = dbConfig;
 
 const connection = await mysql.createConnection({ host, user, password });
-
-const testUsers = [
-  {
-    name: "Test User",
-    email: "test@test.com",
-    pass: "Test1234!",
-  },
-  {
-    name: "Test User 2",
-    email: "test2@test.com",
-    pass: "Test1234!",
-  },
-  {
-    name: "Test User3",
-    email: "test3@test.com",
-    pass: "Test1234!",
-  },
-]
-
-const testNotes = [
-  {
-    title: "This is a test title",
-    bodyContent: "This is some test content!",
-    user_id: 1,
-  },
-  {
-    title: "This is a test title 2",
-    bodyContent: "This is some test content 2!",
-    user_id: 2,
-  },
-  {
-    title: "This is a test title 3",
-    bodyContent: "This is some test content 3!",
-    user_id: 3,
-  },
-  {
-    title: "This is a test title",
-    bodyContent: "This is some test content!",
-    user_id: 3,
-  },
-  {
-    title: "This is a test title 2",
-    bodyContent: "This is some test content 2!",
-    user_id: 1,
-  },
-  {
-    title: "This is a test title 3",
-    bodyContent: "This is some test content 3!",
-    user_id: 2,
-  }
-]
 
 connection.connect((error) => {
   if (error) throw error;
