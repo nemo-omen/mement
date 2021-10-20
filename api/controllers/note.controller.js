@@ -25,10 +25,13 @@ export default class NoteController {
     try {
       const data = req.body;
       const note = new Note();
+
       if (data.title) note.title = data.title;
       if (data.bodyContent) note.bodyContent = data.bodyContent;
+      if (data.user_id) note.user_id = data.user_id;
 
       const createResponse = await service.create(note);
+
       console.log("createResponse: ", createResponse);
 
       res.status(200).send({
@@ -49,14 +52,14 @@ export default class NoteController {
 
       const note = new Note(
         updated.title,
-        updated.created,
-        new Date().toISOString().slice(0, 19).replace("T", " "),
-        updated.bodyContent
+        updated.bodyContent,
+        updated.user_id
       );
 
       note.setId(id);
 
       const updateResponse = await service.update(note);
+
       if (updateResponse[0].affectedRows > 0) {
         res.status(200).send({
           ok: true,

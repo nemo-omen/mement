@@ -1,32 +1,19 @@
 export default class Note {
   id;
   title;
-  created;
-  modified;
   bodyContent;
+  created_at;
+  updated_at;
+  user_id;
 
-  constructor(
-    title = "Untitled Note",
-    created = new Date().toISOString().slice(0, 19).replace("T", " "),
-    modified = new Date().toISOString().slice(0, 19).replace("T", " "),
-    bodyContent = ""
-  ) {
+  constructor(title = "Untitled Note", bodyContent = "", user_id) {
     this.title = title;
-    this.created = created;
-    this.modified = modified;
     this.bodyContent = bodyContent;
+    this.user_id = user_id;
   }
 
   setId(id) {
     this.id = id;
-  }
-
-  setCreated(date) {
-    this.created = new Date(date).toISOString().slice(0, 19).replace("T", " ");
-  }
-
-  setModified() {
-    this.modified = new Date().toISOString().slice(0, 19).replace("T", " ");
   }
 
   setTitle(title) {
