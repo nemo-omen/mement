@@ -9,6 +9,14 @@ export default class NoteService {
     }
   }
 
+  static async getByEmail(email) {
+    try {
+      return await db.query(`SELECT * FROM users WHERE email = ?`, email);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   static async create(user) {
     try {
       return await db.query(`INSERT INTO users SET ?`, user);
