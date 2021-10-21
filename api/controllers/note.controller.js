@@ -44,7 +44,7 @@ export default class NoteController {
         note.setCreatedAt(data.created_at);
         note.setUpdatedAt(data.updated_at);
 
-        res.status(200).send({
+        res.status(201).send({
           ok: true,
           data: note,
         });

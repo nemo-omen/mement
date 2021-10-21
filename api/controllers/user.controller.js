@@ -13,7 +13,12 @@ export default class UserController {
         throw new Error("Registration fields cannot be empty.");
       }
 
-      const user = new User(name, userName, email, await bcrypt.hash(password, salt));
+      const user = new User(
+        name,
+        userName,
+        email,
+        await bcrypt.hash(password, salt)
+      );
 
       const existingEmail = await service.getByEmail(user.email);
       const existingUserName = await service.getByUserName(user.userName);
@@ -43,10 +48,15 @@ export default class UserController {
         } else {
           user.id = createResponse[0].insertId;
 
-          res.status(200).send({
+          res.status(201).send({
             ok: true,
             message: "Registration successful.",
-            data: {id: user.id, name: user.name, userName: user.userName, email: user.email},
+            data: {
+              id: user.id,
+              name: user.name,
+              userName: user.userName,
+              email: user.email,
+            },
           });
         }
       }
