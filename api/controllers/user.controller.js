@@ -13,7 +13,7 @@ export default class UserController {
         throw new Error("Registration fields cannot be empty.");
       }
 
-      const user = new User(name, userName, email, password);
+      const user = new User(name, userName, email, await bcrypt.hash(password, salt));
 
       console.log(user);
 
