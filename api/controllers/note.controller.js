@@ -67,6 +67,15 @@ export default class NoteController {
 
       note.id = id;
 
+      // Get the data from the target record
+      // so we can include the created_at timestamp from the database
+      // when we send the update so it will always remain the same
+      const targetResponse = await service.get(note.id);
+
+      const targetNote = targetResponse[0][0];
+
+      note.created_at = targetNote.created_at;
+
       const updateResponse = await service.update(note);
 
       if (updateResponse[0].affectedRows > 0) {
