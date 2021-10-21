@@ -15,8 +15,6 @@ export default class UserController {
 
       const user = new User(name, userName, email, await bcrypt.hash(password, salt));
 
-      console.log(user);
-
       const existingEmail = await service.getByEmail(user.email);
       const existingUserName = await service.getByUserName(user.userName);
 
@@ -48,7 +46,7 @@ export default class UserController {
           res.status(200).send({
             ok: true,
             message: "Registration successful.",
-            data: user,
+            data: {id: user.id, name: user.name, userName: user.userName, email: user.email},
           });
         }
       }
