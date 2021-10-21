@@ -11,4 +11,12 @@ export default class Note {
     this.bodyContent = bodyContent;
     this.user_id = user_id;
   }
+
+  setCreatedAt(sqlTimestamp) {
+    this.created_at = new Date(sqlTimestamp).toLocaleString();
+  }
+
+  setUpdatedAt(sqlTimestamp) {
+    this.updatedAt = new Date(sqlTimestamp).toLocaleString();
+  }
 }

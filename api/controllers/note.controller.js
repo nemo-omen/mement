@@ -41,8 +41,8 @@ export default class NoteController {
 
         const data = response[0][0];
 
-        note.created_at = data.created_at;
-        note.updated_at = data.updated_at;
+        note.setCreatedAt(data.created_at);
+        note.setUpdatedAt(data.updated_at);
 
         res.status(200).send({
           ok: true,
@@ -65,16 +65,21 @@ export default class NoteController {
         updated.user_id
       );
 
-      note.setId(id);
+      note.id = id;
 
       const updateResponse = await service.update(note);
 
       if (updateResponse[0].affectedRows > 0) {
+        const response = await service.get(note.id);
+
+        const data = response[0][0];
+
+        note.setCreatedAt(data.created_at);
+        note.setUpdatedAt(data.updated_at);
+
         res.status(200).send({
           ok: true,
-          data: {
-            affectedRows: updateResponse[0].affectedRows,
-          },
+          data: note,
         });
       } else {
         res.status(400).send({ ok: false, message: "Database not updated." });

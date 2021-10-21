@@ -51,8 +51,8 @@ try {
     await connection.query(`CREATE TABLE IF NOT EXISTS \`${notesTable}\` (
     id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title varchar(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW() ON UPDATE NOW(),
     bodyContent TEXT NOT NULL,
     user_id INT(11) NOT NULL,
     CONSTRAINT \`Note_USERId_fkey\` FOREIGN KEY (\`user_id\`) REFERENCES \`users\` (\`id\`) ON DELETE CASCADE ON UPDATE CASCADE
