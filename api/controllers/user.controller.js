@@ -121,6 +121,7 @@ export default class UserController {
               name: data.name,
               userName: data.userName,
               email: data.email,
+              token: data.token,
             },
           });
         }
