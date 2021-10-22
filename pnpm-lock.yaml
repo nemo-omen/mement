@@ -20,6 +20,7 @@ specifiers:
   prettier-plugin-svelte: ^2.4.0
   promise-mysql: ^5.0.4
   svelte: ^3.37.0
+  tinro: ^0.6.7
   vite: ^2.6.4
 
 dependencies:
@@ -33,6 +34,7 @@ dependencies:
   mysql2: 2.3.2
   mysql2-promise: 0.1.4
   promise-mysql: 5.0.4
+  tinro: 0.6.7
 
 devDependencies:
   '@babel/cli': 7.15.7_@babel+core@7.15.8
@@ -2339,6 +2341,10 @@ packages:
   /text-table/0.2.0:
     resolution: {integrity: sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=}
     dev: true
+
+  /tinro/0.6.7:
+    resolution: {integrity: sha512-22+7cPgWpJB6pSBAQLZZj1Kyx26GGlhcgsaLdXwWLcwKLKqu6Okh6v0QrLctuwFPSHPD3NHiFW+7pHYiJKl00A==}
+    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=}
