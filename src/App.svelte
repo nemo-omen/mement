@@ -1,7 +1,7 @@
 <script>
   import "./lib/style/reset.css";
   import "./lib/style/global.css";
-  import { Route } from "tinro";
+  // import { Route } from "tinro";
 
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
@@ -15,13 +15,9 @@
 
 <main>
   {#if $authStore !== null}
-    <!-- <Route path="/"> -->
     <Home />
-    <!-- </Route> -->
   {:else}
-    <!-- <Route path="/login"> -->
     <Login />
-    <!-- </Route> -->
   {/if}
 </main>
 

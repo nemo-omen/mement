@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import cors from 'cors';
 import notes from "./routes/note.routes.js";
 import users from "./routes/user.routes.js";
 
@@ -10,6 +11,7 @@ const port = process.env.PORT || "3030";
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.all("/*", (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

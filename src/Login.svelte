@@ -1,31 +1,36 @@
 <script>
-  import { authStore } from "./lib/auth.js";
+  import { authStore, login } from "./lib/auth.js";
   let email;
   let password;
   let loginMessage = "";
 
   async function handleSubmit() {
-    const response = await fetch("http://localhost:3030/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-
-    const data = await response.json();
-
-    console.log(data);
-
-    if (!response.ok) {
-      loginMessage = data.message;
-    } else {
-      $authStore = data.data;
-    }
+    let loginResponse = await login(email, password);
+    console.log(loginResponse);
   }
+
+  // async function handleSubmit() {
+  //   const response = await fetch("http://localhost:3030/login", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       email: email,
+  //       password: password,
+  //     }),
+  //   });
+
+  //   const data = await response.json();
+
+  //   console.log(data);
+
+  //   if (!response.ok) {
+  //     loginMessage = data.message;
+  //   } else {
+  //     $authStore = data.data;
+  //   }
+  // }
 </script>
 
 <div class="login-section">
