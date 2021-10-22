@@ -1,8 +1,11 @@
 # Mement
+
 ## CS3311 Final Project
 
 ### Markdown Notebook
+
 #### Features
+
 - user management (log in etc)
 - Doc, docx, pdf upload/preview/conversion
 - document management (CRUD)
@@ -13,25 +16,26 @@
   - citations, annotations?
   - WYSYWIG styling?
 - directories? (tree structure - how to store in SQL? -- children(0-M), parent(M-1))
-  - record type would be dir: 
- ```js
+  - record type would be dir:
+
+```js
 Directory {
-  name: String,
-  children: String[],
-  parent: Directory{}
+ name: String,
+ children: String[],
+ parent: Directory{}
 }
 
 Note {
-  name: String,
-  parent: Directory{},
-  contents: MDAST Node{},
-  owner: User{}
+ name: String,
+ parent: Directory{},
+ contents: MDAST Node{},
+ owner: User{}
 }
- ```
+```
+
 - drag/drop file organization?(nice-to-have)
 
 #### Routes
-
 
 `/` Client-side app
 
@@ -55,5 +59,10 @@ Note {
 
 [Svelte RealWorld](https://github.com/sveltejs/realworld)
 
-__You just paid for this, may as well use it!__
+### Auth with SvelteKit
+
+[JWT Authentication in Svelte-Kit
+](https://www.reddit.com/r/sveltejs/comments/mqkzqo/jwt_authentication_in_sveltekit/)
+
+**You just paid for this, may as well use it!**
 [Fullstack Svelte](https://www.newline.co/courses/fullstack-svelte/fullstack-svelte-course-overview)

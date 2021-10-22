@@ -1,8 +1,21 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 import service from "../services/user.service.js";
 
 export default class UserController {
+  static async get(req, res) {
+    res.status(200).send({ ok: true, data: { message: "Okay!" } });
+  }
+
+  static async update(req, res) {
+    res.status(200).send({ ok: true, data: { message: "Okay!" } });
+  }
+
+  static async delete(req, res) {
+    res.status(200).send({ ok: true, data: { message: "Okay!" } });
+  }
+
   static async register(req, res) {
     try {
       const { name, userName, email, password } = req.body;
@@ -30,7 +43,7 @@ export default class UserController {
           data: user.email,
         });
       } else if (existingUserName[0].length > 0) {
-        res.status(303).send({
+        res.status(409).send({
           ok: false,
           message: "A user with that user name already exists!",
           data: user.userName,
@@ -48,6 +61,21 @@ export default class UserController {
         } else {
           user.id = createResponse[0].insertId;
 
+          const token = jwt.sign(
+            {
+              user_id: user.id,
+              email: user.email,
+            },
+            process.env.TOKEN_KEY,
+            {
+              expiresIn: "15m",
+            }
+          );
+
+          user.token = token;
+
+          service.update(user);
+
           res.status(201).send({
             ok: true,
             message: "Registration successful.",
@@ -56,6 +84,7 @@ export default class UserController {
               name: user.name,
               userName: user.userName,
               email: user.email,
+              token: user.token,
             },
           });
         }
@@ -66,8 +95,36 @@ export default class UserController {
   }
 
   static async login(req, res) {
+    const { email, password } = req.body;
+
     try {
-      res.status(200).send({ ok: true, message: "You are logged in!!" });
+      console.log(email);
+      const response = await service.getByEmail(email);
+      const data = response[0][0];
+
+      console.log(data);
+
+      if (!data) {
+        res
+          .status(401)
+          .send({ message: `User with email ${email} not found.` });
+      } else {
+        if (
+          // compare hashed password from db to password in request
+          (await bcrypt.compare(password, data.password)) === false
+        ) {
+          res.status(400).send({ message: "Password does not match." });
+        } else {
+          res.status(200).send({
+            ok: true,
+            data: {
+              name: data.name,
+              userName: data.userName,
+              email: data.email,
+            },
+          });
+        }
+      }
     } catch (error) {
       res.status(500).send({ message: error.message });
     }

@@ -1,9 +1,16 @@
+import bcrypt from "bcrypt";
+
+async function getHashed(pw) {
+  const salt = await bcrypt.genSalt(10);
+  return await bcrypt.hash(pw, salt);
+}
+
 export const testUsers = [
   {
     name: "Test User",
     userName: "testUser123",
     email: "test@test.com",
-    password: "Test1234!",
+    password: await getHashed("Test1234!"),
   },
 ];
 

@@ -1,5 +1,6 @@
 import mysql from "mysql2/promise";
 import dbConfig from "./db.config.js";
+import jwt from "jsonwebtoken";
 import { testUsers, testNotes } from "./demo.data.js";
 
 const { host, user, password, database, notesTable, userTable } = dbConfig;
@@ -43,6 +44,11 @@ try {
   if (createdUserTable[0].serverStatus === 2) {
     console.log(`Table ${userTable} created`);
     for (const user of testUsers) {
+      user.token = jwt.sign(
+        { user_id: 1, email: user.email },
+        process.env.TOKEN_KEY,
+        { expiresIn: "15min" }
+      );
       await connection.query(`INSERT INTO \`${userTable}\` SET ?`, user);
     }
   }
