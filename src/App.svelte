@@ -1,12 +1,34 @@
 <script>
   import "./lib/style/reset.css";
   import "./lib/style/global.css";
+  import { onMount } from "svelte";
   // import { Route } from "tinro";
 
   import Login from "./Login.svelte";
   import Home from "./Home.svelte";
-
+  import { isVerified } from "./lib/verify.js";
   import { authStore } from "./lib/auth.js";
+
+  onMount(async () => {
+    // pre-auth user
+    if ($authStore !== null) {
+      const authResponse = await fetch(
+        `http://localhost:3030/user/${$authStore.id}/auth`,
+        {
+          credentials: "include",
+          headers: {
+            Authorization: $authStore.token,
+          },
+        }
+      );
+
+      if (!authResponse.ok) {
+        $isVerified = false;
+      } else {
+        const authData = await authResponse.json();
+      }
+    }
+  });
 </script>
 
 <header>
@@ -14,7 +36,7 @@
 </header>
 
 <main>
-  {#if $authStore !== null}
+  {#if $isVerified === true}
     <Home />
   {:else}
     <Login />

@@ -2,7 +2,6 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 import service from "../services/user.service.js";
-
 export default class UserController {
   static async get(req, res) {
     res.status(200).send({ ok: true, data: { message: "Okay!" } });
@@ -118,6 +117,7 @@ export default class UserController {
           res.status(200).send({
             ok: true,
             data: {
+              id: data.id,
               name: data.name,
               userName: data.userName,
               email: data.email,
